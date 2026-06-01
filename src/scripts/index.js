@@ -51,6 +51,9 @@ const cardInfoModalInfoList = cardInfoModalWindow.querySelector(".popup__info");
 const cardInfoModalLikesTitle = cardInfoModalWindow.querySelector(".popup__text");
 const cardInfoModalUserList = cardInfoModalWindow.querySelector(".popup__list");
 
+const deleteCardModalWindow = document.querySelector(".popup_type_delete-card");
+const deleteCardForm = deleteCardModalWindow.querySelector(".popup__form");
+
 const openProfileFormButton = document.querySelector(".profile__edit-button");
 const openCardFormButton = document.querySelector(".profile__add-button");
 
@@ -59,6 +62,8 @@ const profileDescription = document.querySelector(".profile__description");
 const profileAvatar = document.querySelector(".profile__image");
 
 let currentUserId = null;
+let cardToDelete = null;
+let cardIdToDelete = null;
 
 const setButtonLoading = (button, isLoading, defaultText, loadingText) => {
   button.textContent = isLoading ? loadingText : defaultText;
@@ -145,11 +150,43 @@ const handleInfoClick = (cardData) => {
 };
 
 const handleDeleteCard = (cardElement, cardId) => {
-  deleteCardOnServer(cardId)
+  cardToDelete = cardElement;
+  cardIdToDelete = cardId;
+  openModalWindow(deleteCardModalWindow);
+};
+
+const handleDeleteFormSubmit = (evt) => {
+  evt.preventDefault();
+
+  if (!cardToDelete || !cardIdToDelete) return;
+
+  const submitButton = deleteCardForm.querySelector(".popup__button");
+
+  setButtonLoading(
+    submitButton,
+    true,
+    "Да",
+    "Удаление..."
+  );
+
+  deleteCardOnServer(cardIdToDelete)
     .then(() => {
-      deleteCardElement(cardElement);
+      deleteCardElement(cardToDelete);
+      closeModalWindow(deleteCardModalWindow);
+      cardToDelete = null;
+      cardIdToDelete = null;
     })
-    .catch(() => { });
+    .catch((err) => {
+      console.error(err);
+    })
+    .finally(() => {
+      setButtonLoading(
+        submitButton,
+        false,
+        "Да",
+        "Удаление..."
+      );
+    });
 };
 
 const renderCard = (data, method = "append") => {
@@ -262,6 +299,8 @@ profileForm.addEventListener("submit", handleProfileFormSubmit);
 cardForm.addEventListener("submit", handleCardFormSubmit);
 
 avatarForm.addEventListener("submit", handleAvatarFormSubmit);
+
+deleteCardForm.addEventListener("submit", handleDeleteFormSubmit);
 
 openProfileFormButton.addEventListener("click", () => {
   profileTitleInput.value = profileTitle.textContent;
