@@ -1,7 +1,7 @@
 Интерактивная страница создана в рамках курса Яндекс Практикум.
 
 Ссылка на проект: 
-https://MIMyChSHoW.github.io/mesto-ad-production/
+https://MIMyChSHoW.github.io/mesto-production/
 
 При создании использовались следующие технологии:
 HTML, CSS, JS, сборщик Vite, GitHub Actions, REST API

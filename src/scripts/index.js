@@ -141,7 +141,7 @@ const handleInfoClick = (cardData) => {
 
       openModalWindow(cardInfoModalWindow);
     })
-    .catch(() => {});
+    .catch(() => { });
 };
 
 const handleDeleteCard = (cardElement, cardId) => {
@@ -149,7 +149,7 @@ const handleDeleteCard = (cardElement, cardId) => {
     .then(() => {
       deleteCardElement(cardElement);
     })
-    .catch(() => {});
+    .catch(() => { });
 };
 
 const renderCard = (data, method = "append") => {
@@ -185,7 +185,7 @@ const handleProfileFormSubmit = (evt) => {
 
       closeModalWindow(profileFormModalWindow);
     })
-    .catch(() => {})
+    .catch(() => { })
     .finally(() => {
       setButtonLoading(
         submitButton,
@@ -214,7 +214,7 @@ const handleAvatarFormSubmit = (evt) => {
 
       closeModalWindow(avatarFormModalWindow);
     })
-    .catch(() => {})
+    .catch(() => { })
     .finally(() => {
       setButtonLoading(
         submitButton,
@@ -246,7 +246,7 @@ const handleCardFormSubmit = (evt) => {
 
       closeModalWindow(cardFormModalWindow);
     })
-    .catch(() => {})
+    .catch(() => { })
     .finally(() => {
       setButtonLoading(
         submitButton,
@@ -309,4 +309,4 @@ Promise.all([getCardList(), getUserInfo()])
       renderCard(card);
     });
   })
-  .catch(() => {});
+  .catch(() => { });
