@@ -14,6 +14,15 @@
   /*Если подгонять под ПЭПЭ, то тут padding: 40px 0; Проявите лоялити*/
 }
 
+.profile__image {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 @media screen and (max-width: 480px) {
   .profile {
     padding: 43px 0 20px;
